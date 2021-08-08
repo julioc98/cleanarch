@@ -24,10 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.16.5
       - name: Get dependencies
         run: |
           go version
@@ -40,19 +36,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.16.5
-      - name: Generate coverage report
-        run: |
-          go version
-          go test `go list ./... | grep -v examples` -coverprofile=coverage.txt -covermode=atomic
+      - name: Test
+        run: go test -v ./... 
 
   codecov:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - name: Generate coverage report
+        run: |
+          go version
+          go test `go list ./... | grep -v examples` -coverprofile=coverage.txt -covermode=atomic
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
