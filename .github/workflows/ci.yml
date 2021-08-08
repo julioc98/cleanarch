@@ -19,9 +19,9 @@ jobs:
           go-version: 1.16
   
   lint:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
         with:
@@ -39,7 +39,6 @@ jobs:
 
   test:
     needs: setup
-    name: codecov
     runs-on: ubuntu-latest
     steps:
       - name: Generate coverage report
@@ -48,7 +47,6 @@ jobs:
 
   codecov:
     needs: test
-    name: codecov
     runs-on: ubuntu-latest
     steps:
       - name: Upload coverage to Codecov
