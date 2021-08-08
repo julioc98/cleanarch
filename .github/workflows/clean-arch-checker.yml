@@ -13,8 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.16.5' 
+      - name: Install go-cleanarch
+        run: go get -v -u github.com/roblaszczak/go-cleanarch
       - name: Clean Architecture checker for Golang
         run: |
           go version
-          GO111MODULE=on go get github.com/roblaszczak/go-cleanarch
+          
           go-cleanarch
