@@ -2,7 +2,10 @@
 package app
 
 import (
+	"log"
+
 	"github.com/julioc98/cleanarch/internal/domain"
+	"github.com/julioc98/cleanarch/internal/infra/repository"
 )
 
 type storager interface {
@@ -47,6 +50,8 @@ func NewUserUseCase(s storager, e encrypter, a authentifier, v checker, m messen
 
 // SignUp create a new user.
 func (u *UserUseCase) SignUp(user *domain.User) (*domain.User, error) {
+	log.Println(repository.UserGorm{})
+
 	err := u.validate.Struct(user)
 	if err != nil {
 		return nil, ErrInvalid
