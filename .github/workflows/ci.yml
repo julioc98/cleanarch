@@ -42,6 +42,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Generate coverage report
         run: |
           go version
