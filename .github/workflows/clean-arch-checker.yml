@@ -1,0 +1,19 @@
+name: go-cleanarch
+on:
+  push:
+    tags:
+      - v*
+    branches: 
+      - master
+  pull_request:
+    branches: 
+      - master
+jobs:
+  checker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Clean Architecture checker for Golang
+        run: |
+          go get github.com/roblaszczak/go-cleanarch
+          go-cleanarch
