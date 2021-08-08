@@ -1,0 +1,44 @@
+name: CI
+on:
+  push:
+    tags:
+      - v*
+    branches: 
+      - master
+  pull_request:
+    branches: 
+      - master
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Get dependencies
+      run: |
+        go get -v -t -d ./...
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.16
+
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v2
+      with:
+        version: latest
+
+    - name: Build
+      run: go build -v ./...
+
+    - name: Generate coverage report
+      run: |
+        go test `go list ./... | grep -v examples` -coverprofile=coverage.txt -covermode=atomic
+   
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        file: ./coverage.txt
+        flags: unittests
+        name: codecov-umbrella
+        verbose: true
