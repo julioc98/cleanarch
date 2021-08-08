@@ -15,5 +15,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Clean Architecture checker for Golang
         run: |
-          go get github.com/roblaszczak/go-cleanarch
+          go version
+          GO111MODULE=on go get github.com/roblaszczak/go-cleanarch
           go-cleanarch
