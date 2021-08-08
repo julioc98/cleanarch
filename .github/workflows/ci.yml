@@ -27,6 +27,7 @@ jobs:
       - name: Get dependencies
         run: |
           go get -v -t -d ./...
+          go version
       - name: Build
         run: go build -v ./...
 
@@ -37,6 +38,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Generate coverage report
         run: |
+          go version
           go test `go list ./... | grep -v examples` -coverprofile=coverage.txt -covermode=atomic
 
   codecov:
