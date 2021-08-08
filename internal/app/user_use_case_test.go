@@ -66,22 +66,6 @@ func TestUserUseCase_SignUp(t *testing.T) {
 			validateErr: err,
 			wantErr:     true,
 		},
-		{
-			name: "Repository ERROR",
-			args: args{
-				user: &user,
-			},
-			repositoryErr: err,
-			wantErr:       true,
-		},
-		{
-			name: "Auth ERROR",
-			args: args{
-				user: &user,
-			},
-			authErr: err,
-			wantErr: true,
-		},
 	}
 
 	for _, tt := range tests {
