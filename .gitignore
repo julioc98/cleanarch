@@ -12,9 +12,10 @@
 *.out
 coverage.html
 coverage.txt
+.dccache
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor/
 
 # Temporary files
 *.tmp
